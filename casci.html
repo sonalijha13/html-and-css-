@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        /* General body and center content */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Calculator container */
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Display section */
+        .display {
+            font-size: 2rem;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        /* Grid for buttons */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        /* Button styling */
+        .button {
+            padding: 20px;
+            font-size: 1.5rem;
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button hover effect */
+        .button:hover {
+            background-color: #ddd;
+        }
+
+        /* Special buttons (clear, equal) */
+        .button.operator {
+            background-color: #ff8c00;
+            color: white;
+        }
+
+        .button.equal {
+            background-color: #4caf50;
+            color: white;
+            grid-column: span 2;
+        }
+
+        .button.clear {
+            background-color: #f44336;
+            color: white;
+            grid-column: span 2;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <!-- Calculator buttons -->
+            <button class="button clear" onclick="clearDisplay()">C</button>
+            <button class="button operator" onclick="appendNumber('/')">/</button>
+            <button class="button operator" onclick="appendNumber('*')">*</button>
+            <button class="button operator" onclick="appendNumber('-')">-</button>
+            
+            <button class="button" onclick="appendNumber(7)">7</button>
+            <button class="button" onclick="appendNumber(8)">8</button>
+            <button class="button" onclick="appendNumber(9)">9</button>
+            <button class="button operator" onclick="appendNumber('+')">+</button>
+            
+            <button class="button" onclick="appendNumber(4)">4</button>
+            <button class="button" onclick="appendNumber(5)">5</button>
+            <button class="button" onclick="appendNumber(6)">6</button>
+            <button class="button equal" onclick="calculate()">=</button>
+            
+            <button class="button" onclick="appendNumber(1)">1</button>
+            <button class="button" onclick="appendNumber(2)">2</button>
+            <button class="button" onclick="appendNumber(3)">3</button>
+            
+            <button class="button zero" onclick="appendNumber(0)">0</button>
+            <button class="button" onclick="appendNumber('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById("display");
+        let currentInput = "";
+        
+        // Append number to the display
+        function appendNumber(number) {
+            currentInput += number.toString();
+            display.innerText = currentInput;
+        }
+
+        // Clear the display
+        function clearDisplay() {
+            currentInput = "";
+            display.innerText = "0";
+        }
+
+        // Perform the calculation
+        function calculate() {
+            try {
+                currentInput = eval(currentInput).toString();  // Using eval to evaluate the input string
+                display.innerText = currentInput;
+            } catch (e) {
+                display.innerText = "Error";
+                currentInput = "";
+            }
+        }
+
+        // Append operator to the display
+        function appendOperator(operator) {
+            currentInput += operator;
+            display.innerText = currentInput;
+        }
+    </script>
+
+</body>
+</html>
